@@ -76,6 +76,7 @@ function handleProfileFormSubmit(evt) {
     const job = jobInput.value;
     profileTitle.textContent = name;
     profileDescription.textContent = job;
+    onProfileClose();
 }
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
@@ -108,7 +109,7 @@ function handleCardFormSubmit(evt) {
     const link = linkInput.value;
     const newCard = createCard(link, title);
     placesList.insertBefore(newCard, placesList.firstChild);
-    closeModal(cardPopup);
+    onCardClose();
 }
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
 
