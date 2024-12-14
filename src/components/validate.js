@@ -20,39 +20,6 @@ const checkInputValidity = (formElement, inputElement, validationSettings) => {
     }
 };
   
-const setEventListeners = (formElement, validationSettings) => {
-    const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
-    const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
-    // toggleButtonState(inputList, buttonElement, validationSettings);
-    inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', function () {
-        checkInputValidity(formElement, inputElement, validationSettings);
-        toggleButtonState(inputList, buttonElement, validationSettings);
-        });
-    });
-};
-  
-const enableValidation = (validationSettings) => {
-    const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
-    formList.forEach((formElement) => {
-        // formElement.addEventListener('submit', function (evt) {
-        //     evt.preventDefault();
-        // });
-        // const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
-
-        //     fieldsetList.forEach((fieldSet) => {
-        //         setEventListeners(fieldSet);
-        // }); 
-        setEventListeners(formElement, validationSettings);
-    });
-    /* костыль. Настройка, верная до тех пор, пока при загрузке страницы
-    input-элементы первой формы валидны, а второй - нет: */
-    const buttonList = Array.from(document.querySelectorAll('.popup__button'));
-    buttonList[1].classList.add(validationSettings.inactiveButtonClass);
-};
-  
-// enableValidation();
-  
 function hasInvalidInput(inputList) {
     return inputList.some( (inputElement) => {
         return !inputElement.validity.valid;
@@ -66,5 +33,24 @@ function toggleButtonState (inputList, buttonElement, validationSettings) {
         buttonElement.classList.remove(validationSettings.inactiveButtonClass);
     }
 }
+
+const setEventListeners = (formElement, validationSettings) => {
+    const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+    const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
+    toggleButtonState(inputList, buttonElement, validationSettings);
+    inputList.forEach((inputElement) => {
+        inputElement.addEventListener('input', function () {
+        checkInputValidity(formElement, inputElement, validationSettings);
+        toggleButtonState(inputList, buttonElement, validationSettings);
+        });
+    });
+};
+  
+const enableValidation = (validationSettings) => {
+    const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+    formList.forEach((formElement) => { 
+        setEventListeners(formElement, validationSettings);
+    });
+};
 
 export {enableValidation};
