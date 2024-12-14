@@ -19,7 +19,10 @@ import { updateFormValidity } from './validate';
 
 // Открыть модальное окно (попап)
 function openModal(popup, validationSettings) {
-    updateFormValidity(popup.querySelector('.popup__form'), validationSettings);
+    if (popup.querySelector(validationSettings.formSelector)) { // если есть у чего проверять валидность
+        // обновляем состояние валидности формы
+        updateFormValidity(popup.querySelector(validationSettings.formSelector), validationSettings);
+    }
     popup.classList.add('popup_is-opened');
     popup.addEventListener('click', closeByOverlay);
     document.addEventListener('keydown', closeByEsc);
