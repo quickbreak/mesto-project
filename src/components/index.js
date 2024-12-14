@@ -34,7 +34,7 @@ function onProfileEdit(evt) {
     evt.stopPropagation();
     nameInput.value = profileTitle.textContent;
     descriptionInput.value = profileDescription.textContent;
-    openModal(profilePopup);
+    openModal(profilePopup, validationSettings);
 }
 const editButton = document.querySelector('.profile__edit-button');
 editButton.addEventListener("click", onProfileEdit);
@@ -81,7 +81,7 @@ function onCardAdd(evt) {
     evt.stopPropagation();
     titleInput.value = "";
     linkInput.value = "";
-    openModal(cardPopup);
+    openModal(cardPopup, validationSettings);
 }
 const addCardButton = document.querySelector('.profile__add-button');
 addCardButton.addEventListener("click", onCardAdd);
@@ -130,7 +130,7 @@ function showCard(evt) {
     imageToShow.src = link;
     imageToShow.alt = title.textContent;
     captionToShowLink.textContent = imageToShow.alt;
-    openModal(imagePopup);
+    openModal(imagePopup, validationSettings);
 }
 // Закрытие окна просмотра картинки
 function closeShow() {
@@ -206,7 +206,7 @@ const avatarLinkInput = avatarPopup.querySelector('.popup__input_type_url');
 function onAvatarEdit(evt) {
     evt.stopPropagation();
     avatarLinkInput.value = "";
-    openModal(avatarPopup);
+    openModal(avatarPopup, validationSettings);
 }
 const avatarElement = document.querySelector('.profile__image-container');
 avatarElement.addEventListener('click', onAvatarEdit);

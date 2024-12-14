@@ -15,8 +15,11 @@ function closeByOverlay(evt) {
 }
 
 
+import { updateFormValidity } from './validate';
+
 // Открыть модальное окно (попап)
-function openModal(popup) {      
+function openModal(popup, validationSettings) {
+    updateFormValidity(popup.querySelector('.popup__form'), validationSettings);
     popup.classList.add('popup_is-opened');
     popup.addEventListener('click', closeByOverlay);
     document.addEventListener('keydown', closeByEsc);
