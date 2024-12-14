@@ -1,6 +1,7 @@
 .profile__image-container {
     font-size: 0;
     position: relative;
+    cursor: pointer;
 }
   
 .profile__image-container::after {
